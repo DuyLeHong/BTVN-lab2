@@ -6,7 +6,7 @@ const url = require("url");
 http
   .createServer(function (req, res) {
     const parsedUrl = url.parse(req.url, true);
-    if (parsedUrl.pathname === "/") {
+    if (parsedUrl.pathname == "/") {
       fs.readFile("index.html", function (err, data) {
         if (err) {
           res.writeHead(404, { "Content-Type": "text/html" });
@@ -16,8 +16,11 @@ http
         res.write(data);
         return res.end();
       });
-    } else if (parsedUrl.pathname === "/calculate") {
+    } else if (parsedUrl.pathname === "/tinhtoan") {
       const query = parsedUrl.query;
+
+      console.log(query);
+
       const num1 = parseFloat(query.num1);
       const num2 = parseFloat(query.num2);
       const operator = query.operator;
@@ -43,9 +46,7 @@ http
 
       res.writeHead(200, { "Content-Type": "text/html" });
       res.write(
-        `<p style="text-align: center; font-size: 25px;">Result: ${result.toFixed(
-          2
-        )}</p>`
+        `<p style="text-align: center; font-size: 25px;">Result: ${result}</p>`
       );
       return res.end();
     } else {
